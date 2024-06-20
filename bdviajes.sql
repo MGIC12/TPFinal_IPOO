@@ -8,6 +8,13 @@ CREATE TABLE empresa(
     PRIMARY KEY (idempresa)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
+CREATE TABLE persona(
+    documento varchar(15),
+    nombre varchar(50),
+    apellido varchar(50),
+    PRIMARY KEY (documento)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
 CREATE TABLE responsable (
     rnumeroempleado bigint AUTO_INCREMENT,
     rnumerolicencia bigint,
