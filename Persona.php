@@ -1,47 +1,49 @@
 <?php
 
 class Persona{
+    private $documento;
     private $nombre;
     private $apellido;
-    private $documento;
     private $mensajeOperacion;
 
     //metodo constructor
     public function __construct(){
+        $this->documento="";
         $this->nombre="";
         $this->apellido="";
-        $this->documento="";
     }
 
-    public function cargar($nom, $apell, $doc){
+    public function cargar($doc, $nom, $apell){
+        $this->setDocumento($doc);
         $this->setNombre($nom);
         $this->setApellido($apell);
-        $this->setDocumento($doc);
     }
 
     //metodos de acceso
 
+    
+    public function getDocumento(){
+        return $this->documento;
+    }
     public function getNombre(){
         return $this->nombre;
     }
     public function getApellido(){
         return $this->apellido;
     }
-    public function getDocumento(){
-        return $this->documento;
-    }
     public function getMensaje(){
         return $this->mensajeOperacion;
     }
 
+    
+    public function setDocumento($documento){
+        $this->documento=$documento;
+    }
     public function setNombre($nombre){
         $this->nombre=$nombre;
     }
     public function setApellido($apellido){
         $this->apellido=$apellido;
-    }
-    public function setDocumento($documento){
-        $this->documento=$documento;
     }
     public function setMensaje($mensaje){
         $this->mensajeOperacion=$mensaje;
@@ -61,10 +63,10 @@ class Persona{
 		$resp= false;
 		if($base->iniciar()){
 			if($base->ejecutar($consulta)){
-				if($persona=$base->registro()){					
-				    $this->setDocumento($persona['documento']);
-					$this->setNombre($persona['nombre']);
-					$this->setApellido($persona['apellido']);
+				if($row2=$base->registro()){					
+				    $this->setDocumento($row2['documento']);
+					$this->setNombre($row2['nombre']);
+					$this->setApellido($row2['apellido']);
 					$resp= true;
 				}				
 			
@@ -80,15 +82,37 @@ class Persona{
 	}
 
 
-    //hacer funcion listar
+    public function listar($condicion=""){
+        $arrayPersona=null;
+        $base=new BaseDatos();
+        $consulta="SELECT * FROM persona ";
+        if($condicion!=""){
+            $consulta=$consulta." WHERE ".$condicion;
+        }
+        $consulta.=" ORDER BY apellido ";
+        if($base->iniciar()){
+            if($base->ejecutar($consulta)){
+                $arrayPersona= array();
+                while($row2=$base->registro()){
+                    $documento=$row2['documento'];
+                    $nombre=$row2['nombre'];
+                    $apellido=$row2['apellido'];
+
+                    $persona=new Persona();
+                    $persona->cargar($documento, $nombre, $apellido);
+                    array_push($arrayPersona,$persona);
+                }
+            }
+        }
+    }
 
 
     
     public function insertar(){
         $base=new BaseDatos();
         $resp=false;
-        $consulta="INSERT INTO persona(nombre, apellido, documento)
-                VALUES ('".$this->getNombre()."','".$this->getApellido().",'".$this->getDocumento()."')";
+        $consulta="INSERT INTO persona(documento, nombre, apellido)
+                VALUES ('".$this->getDocumento()."','".$this->getNombre().",'".$this->getApellido()."')";
         if($base->iniciar()){
             if($base->ejecutar($consulta)){
                 $resp=true;
@@ -139,9 +163,9 @@ class Persona{
 
     public function __tostring(){
         return
+        "Documento: ".$this->getDocumento()."\n".
         "Nombre: ".$this->getNombre()."\n".
-        "Apellido: ".$this->getApellido()."\n".
-        "Documento: ".$this->getDocumento()."\n";
+        "Apellido: ".$this->getApellido()."\n";
 
     }
 }
