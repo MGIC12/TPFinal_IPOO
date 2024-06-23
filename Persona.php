@@ -64,7 +64,7 @@ class Persona{
 		if($base->iniciar()){
 			if($base->ejecutar($consulta)){
 				if($row2=$base->registro()){					
-				    $this->setDocumento($row2['documento']);
+				    $this->setDocumento($dni);
 					$this->setNombre($row2['nombre']);
 					$this->setApellido($row2['apellido']);
 					$resp= true;
@@ -102,7 +102,11 @@ class Persona{
                     $persona->cargar($documento, $nombre, $apellido);
                     array_push($arrayPersona,$persona);
                 }
+            }else{
+                $this->setMensaje($base->getError());
             }
+        }else{
+            $this->setMensaje($base->getError());
         }
     }
 
@@ -161,7 +165,7 @@ class Persona{
 
 
 
-    public function __tostring(){
+    public function __toString(){
         return
         "Documento: ".$this->getDocumento()."\n".
         "Nombre: ".$this->getNombre()."\n".
