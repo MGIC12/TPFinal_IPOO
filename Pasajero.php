@@ -74,7 +74,7 @@ class Pasajero extends Persona{
         $consulta.=" ORDER BY papellido ";
         if($base->iniciar()){
             if($base->ejecutar($consulta)){
-                $arrayTabla= array();
+                $arrayPasajero= array();
                 while($row2=$base->registro()){
                     /*
                     $telefono=$row2['ptelefono'];
@@ -100,15 +100,16 @@ class Pasajero extends Persona{
         if(parent::insertar()){
             $consulta="INSERT INTO pasajero(pdocumento, ptelefono, idviaje)
                     VALUES ('".$this->getDocumento()."','".$this->getTelefono().",'".$this->getIdViaje()."')";
-        }
-        if($base->iniciar()){
-            if($base->ejecutar($consulta)){
-                $resp=true;
+        
+            if($base->iniciar()){
+                if($base->ejecutar($consulta)){
+                    $resp=true;
+                }else{
+                    $this->setMensaje($base->getError());
+                }
             }else{
                 $this->setMensaje($base->getError());
             }
-        }else{
-            $this->setMensaje($base->getError());
         }
         return $resp;
     }
@@ -120,15 +121,16 @@ class Pasajero extends Persona{
         $base=new BaseDatos();
         if(parent::modificar()){
             $consulta="UPDATE pasajero SET ptelefono='".$this->getTelefono()."',idviaje='".$this->getIdViaje()."' WHERE pdocumento=".$this->getDocumento();
-        }
-        if($base->iniciar()){
-            if($base->ejecutar($consulta)){
-                $resp=true;
+        
+            if($base->iniciar()){
+                if($base->ejecutar($consulta)){
+                    $resp=true;
+                }else{
+                    $this->setMensaje($base->getError());
+                }
             }else{
                 $this->setMensaje($base->getError());
             }
-        }else{
-            $this->setMensaje($base->getError());
         }
         return $resp;
     }
