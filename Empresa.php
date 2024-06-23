@@ -104,7 +104,7 @@ class Empresa{
         $base=new BaseDatos();
         $resp=false;
         $consulta="INSERT INTO empresa(idempresa, enombre, edireccion)
-                VALUES ('".$this->getIdEmpresa()."','".$this->getNombre().",'".$this->getDireccion()."')";
+                VALUES ('".$this->getIdEmpresa()."','".$this->getNombre()."','".$this->getDireccion()."')";
         if($base->iniciar()){
             if($base->ejecutar($consulta)){
                 $resp=true;

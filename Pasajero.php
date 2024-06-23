@@ -99,7 +99,7 @@ class Pasajero extends Persona{
         $resp=false;
         if(parent::insertar()){
             $consulta="INSERT INTO pasajero(pdocumento, ptelefono, idviaje)
-                    VALUES ('".$this->getDocumento()."','".$this->getTelefono().",'".$this->getIdViaje()."')";
+                    VALUES ('".$this->getDocumento()."','".$this->getTelefono()."','".$this->getIdViaje()."')";
         
             if($base->iniciar()){
                 if($base->ejecutar($consulta)){

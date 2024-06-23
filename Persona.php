@@ -116,7 +116,7 @@ class Persona{
         $base=new BaseDatos();
         $resp=false;
         $consulta="INSERT INTO persona(documento, nombre, apellido)
-                VALUES ('".$this->getDocumento()."','".$this->getNombre().",'".$this->getApellido()."')";
+                VALUES ('".$this->getDocumento()."','".$this->getNombre()."','".$this->getApellido()."')";
         if($base->iniciar()){
             if($base->ejecutar($consulta)){
                 $resp=true;
