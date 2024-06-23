@@ -18,6 +18,7 @@ CREATE TABLE persona(
 CREATE TABLE responsable (
     rnumeroempleado bigint AUTO_INCREMENT,
     rnumerolicencia bigint,
+    rdocumento bigint,
 	rnombre varchar(150), 
     rapellido  varchar(150), 
     PRIMARY KEY (rnumeroempleado)
