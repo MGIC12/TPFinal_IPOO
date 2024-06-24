@@ -229,9 +229,59 @@ function ingresarViaje(){
     $viaje->cargar(null, $dest, $cantMax, [], $objResponsable, $costo, $objEmpresa);
 }
 
-function modificarViaje(){}
+function modificarViaje(){
+    echo "Ingrese el id del viaje a modificar: \n";
+    $id=trim(fgets(STDIN));
+    $viaje=new Viaje();
+    if(!$viaje->buscar($id)){
+        echo "No se encontro ningun viaje con dicho ID. \n";
+    }else{
+        echo "Ingrese el nuevo destino: \n";
+        $dest=trim(fgets(STDIN));
+        echo "Ingrese la cantidad maxima de pasajeros: \n";
+        $cantmax=trim(fgets(STDIN));
+        echo "Ingrese el numero de empleado: \n";
+        $numEmp=trim(fgets(STDIN));
+        $responsable=new ResponsableV();
+        if(!$responsable->buscar($numEmp)){
+            do{
+                echo "No se encontro ningun responsable con ese numero de empleado: \n";
+                echo "Ingrese un numero de empleado valido: ";
+                $numEmp=trim(fgets(STDIN));
+            }while(!$responsable->buscar($numEmp));
+        }
+        echo "Ingrese el costo de viaje: \n";
+        $costo=trim(fgets(STDIN));
+        echo "Ingrese el ID de la empresa: \n";
+        $idEmp=trim(fgets(STDIN));
+        $empresa=new Empresa();
+        if(!$empresa->buscar($idEmp)){
+            do{
+                echo "No se encontro ninguna empresa con dicho ID. \n";
+                echo "Ingrese un ID de empresa valido: \n";
+                $idEmp=trim(fgets(STDIN));
+            }while(!$empresa->buscar($idEmp));
+        }
+        $viaje->setDestino($dest);
+        $viaje->setCantMaxPasajeros($cantmax);
+        $viaje->setColObjPasajero([]);
+        $viaje->setObjResponsable($responsable);
+        $viaje->setCosto($costo);
+        $viaje->setObjEmpresa($empresa);
+        return $viaje->modificar();
+    }
+}
 
-function eliminarViaje(){}
+function eliminarViaje(){
+    echo "Ingrese el ID del viaje a eliminar: \n";
+    $id=trim(fgets(STDIN));
+    $viaje=new Viaje();
+    if(!$viaje->buscar($id)){
+        echo "No se encontro ningun viaje con dicho ID. \n";
+    }else{
+        return $viaje->eliminar();
+    }
+}
 
 function mostrarPasajeros(){
     $pasajero=new Pasajero();
@@ -241,8 +291,47 @@ function mostrarPasajeros(){
     }
 }
 
-function ingresarPasajero(){}
+function ingresarPasajero(){
+    echo "Ingrese el nombre del pasajero: \n";
+    $nom=trim(fgets(STDIN));
+    echo "Ingrese el apellido: \n";
+    $apell=trim(fgets(STDIN));
+    echo "Ingrese el numero de documento: ";
+    $doc=trim(fgets(STDIN));
+    echo "Ingrese el numero de telefono: \n";
+    $tel=trim(fgets(STDIN));
+    echo "Ingrese el ID del viaje: \n";
+    $id=trim(fgets(STDIN));
+    $pasajero=new Pasajero();
+    $pasajero->cargar($doc, $nom, $apell, $tel, $id);
+    return $pasajero->insertar();
+}
 
-function modificarPasajero(){}
+function modificarPasajero(){
+    echo "Ingrese el numero de documento del pasajero a modificar: \n";
+    $doc=trim(fgets(STDIN));
+    $pasajero=new Pasajero();
+    if(!$pasajero->buscar($doc)){
+        do{
+            echo "No se encontro ningun pasajero con ese documento. \n";
+            echo "Ingrese un numero de documento valido: \n";
+            $doc=trim(fgets(STDIN));
+        }while(!$pasajero->buscar($doc));
+    }else{
+        echo "Ingrese el nuevo nombre: \n";
+        $nom=trim(fgets(STDIN));
+        echo "Ingrese el apellido: \n";
+        $apell=trim(fgets(STDIN));
+        echo "Ingrese el telefono: \n";
+        $tel=trim(fgets(STDIN));
+        echo "Ingrese el ID del viaje: \n";
+        $id=trim(fgets(STDIN));
+        $pasajero->setNombre($nom);
+        $pasajero->setApellido($apell);
+        $pasajero->setTelefono($tel);
+        $pasajero->setIdViaje($id);
+        return $pasajero->modificar();
+    }
+}
 
 function eliminarPasajero(){}
