@@ -227,6 +227,7 @@ function ingresarViaje(){
     }
     $viaje=new Viaje();
     $viaje->cargar(null, $dest, $cantMax, [], $objResponsable, $costo, $objEmpresa);
+    return $viaje->insertar();
 }
 
 function modificarViaje(){
@@ -296,7 +297,7 @@ function ingresarPasajero(){
     $nom=trim(fgets(STDIN));
     echo "Ingrese el apellido: \n";
     $apell=trim(fgets(STDIN));
-    echo "Ingrese el numero de documento: ";
+    echo "Ingrese el numero de documento: \n";
     $doc=trim(fgets(STDIN));
     echo "Ingrese el numero de telefono: \n";
     $tel=trim(fgets(STDIN));
@@ -334,4 +335,13 @@ function modificarPasajero(){
     }
 }
 
-function eliminarPasajero(){}
+function eliminarPasajero(){
+    echo "Ingrese el numero de documento del pasajero a eliminar: \n";
+    $doc=trim(fgets(STDIN));
+    $pasajero=new Pasajero();
+    if(!$pasajero->buscar($doc)){
+        echo "No se encontro ningun pasajero con ese documento. \n";
+    }else{
+        return $pasajero->eliminar();
+    }
+}
