@@ -92,8 +92,6 @@ function mostrarEmpresas(){
 }
 
 function ingresarEmpresa(){
-    echo "Ingrese el id de la Empresa: \n";
-    $id=trim(fgets(STDIN));
     echo "Ingrese el nombre de la Empresa: \n";
     $nom=trim(fgets(STDIN));
     echo "Ingrese la direccion de la Empresa: \n";
@@ -199,10 +197,18 @@ function mostrarViajes(){
 }
 
 function ingresarViaje(){
-    echo "Ingrese el destino: \n";
-    $dest=trim(fgets(STDIN));
-    echo "Ingrese la cantidad maxima de pasajeros: \n";
-    $cantMax=trim(fgets(STDIN));
+    echo "Ingrese el id de la empresa: \n";
+    $id=trim(fgets(STDIN));
+    $empresa=new Empresa();
+    if(!$empresa->buscar($id)){
+        do{
+            echo "no existe ninguna empresa con ese ID. \n";
+            echo "ingrese el ID de una empresa valido: \n";
+            $id=trim(fgets(STDIN));
+        }while(!$empresa->buscar($id));
+    }else{
+        echo "La empresa es ".$empresa->getNombre()."\n";
+    }
     echo "Ingrese el numero de empleado del responsable: \n";
     $numEmpl=trim(fgets(STDIN));
     $objResponsable=new ResponsableV();
@@ -212,21 +218,18 @@ function ingresarViaje(){
             echo "ingrese un numero de empleado valido: \n";
             $numEmpl=trim(fgets(STDIN));
         }while(!$objResponsable->buscar($numEmpl));
+    }else{
+        echo "El responsable es: ".$objResponsable->getNombre()." ".$objResponsable->getApellido()."\n";
     }
+    echo "Ingrese el destino: \n";
+    $dest=trim(fgets(STDIN));
+    echo "Ingrese la cantidad maxima de pasajeros: \n";
+    $cantMax=trim(fgets(STDIN));
     echo "Ingrese el costo del viaje: \n";
     $costo=trim(fgets(STDIN));
-    echo "Ingrese el id de la empresa: \n";
-    $id=trim(fgets(STDIN));
-    $objEmpresa=new Empresa();
-    if(!$objEmpresa->buscar($id)){
-        do{
-            echo "no existe ninguna empresa con ese ID. \n";
-            echo "ingrese el ID de una empresa valido: \n";
-            $id=trim(fgets(STDIN));
-        }while(!$objEmpresa->buscar($id));
-    }
+    $arrayPasajeros=[];
     $viaje=new Viaje();
-    $viaje->cargar(null, $dest, $cantMax, [], $objResponsable, $costo, $objEmpresa);
+    $viaje->cargar(null, $dest, $cantMax, $arrayPasajeros, $objResponsable->getNumEmpleado(), $costo, $id);
     return $viaje->insertar();
 }
 

@@ -22,7 +22,7 @@ class Viaje{
         $this->objResponsableV=null;
         $this->costo="";
         $this->sumaCostosAbonados=0;
-        $this->objEmpresa=null;
+        $this->objEmpresa="";
     }
 
 

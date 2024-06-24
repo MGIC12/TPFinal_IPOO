@@ -32,7 +32,7 @@ CREATE TABLE responsable (
 CREATE TABLE viaje (
     idviaje bigint AUTO_INCREMENT, /*codigo de viaje*/
 	vdestino varchar(150),
-    vcantmaxpasajeros int,
+    vcantmaxpasajeros bigint,
 	idempresa bigint,
     rnumeroempleado bigint,
     vimporte float,
