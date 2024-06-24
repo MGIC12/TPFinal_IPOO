@@ -143,12 +143,52 @@ function mostrarResponsable(){
 }
     
 function ingresarResponsable(){
+    echo "Ingrese el nombre: \n";
+    $nom=trim(fgets(STDIN));
+    echo "Ingrese el apellido: \n";
+    $apell=trim(fgets(STDIN));
+    echo "Ingrese el numero de documento: \n";
+    $nroDoc=trim(fgets(STDIN));
+    echo "Ingrese el numero de licencia: \n";
+    $numLic=trim(fgets(STDIN));
+    $responsable=new ResponsableV();
+    $responsable->cargar($nroDoc, $nom, $apell, null, $numLic);
+    return $responsable->insertar();
+}
+
+function modificarResponsable(){
+    echo "ingrese el numero de empleado: \n";
+    $numEmpl=trim(fgets(STDIN));
+    $responsable=new ResponsableV();
+    if(!$responsable->buscar($numEmpl)){
+        echo "no se encontro ningun responsable con dicho numero de empleado. \n";
+    }else{
+        echo "Ingrese el numero de licencia: \n";
+        $numLic=trim(fgets(STDIN));
+        echo "Ingrese el nombre: \n";
+        $nom=trim(fgets(STDIN));
+        echo "Ingrese el apellido: \n";
+        $apell=trim(fgets(STDIN));
+        $responsable->setNumLicencia($numLic);
+        $responsable->setNombre($nom);
+        $responsable->setApellido($apell);
+        return $responsable->modificar();
+    }
+    
+    
     
 }
 
-function modificarResponsable(){}
-
-function eliminarResponsable(){}
+function eliminarResponsable(){
+    echo "ingrese el numero de empleado: \n";
+    $numEmpl=trim(fgets(STDIN));
+    $responsable=new ResponsableV();
+    if(!$responsable->buscar($numEmpl)){
+        echo "no se encontro ningun responsable con dicho numero de empleado. \n";
+    }else{
+        return $responsable->eliminar();
+    }
+}
 
 function mostrarViajes(){
     $viaje=new Viaje();
@@ -158,7 +198,36 @@ function mostrarViajes(){
     }
 }
 
-function ingresarViaje(){}
+function ingresarViaje(){
+    echo "Ingrese el destino: \n";
+    $dest=trim(fgets(STDIN));
+    echo "Ingrese la cantidad maxima de pasajeros: \n";
+    $cantMax=trim(fgets(STDIN));
+    echo "Ingrese el numero de empleado del responsable: \n";
+    $numEmpl=trim(fgets(STDIN));
+    $objResponsable=new ResponsableV();
+    if(!$objResponsable->buscar($numEmpl)){
+        do{
+            echo "no existe ningun responsable con este numero de empleado. \n";
+            echo "ingrese un numero de empleado valido: \n";
+            $numEmpl=trim(fgets(STDIN));
+        }while(!$objResponsable->buscar($numEmpl));
+    }
+    echo "Ingrese el costo del viaje: \n";
+    $costo=trim(fgets(STDIN));
+    echo "Ingrese el id de la empresa: \n";
+    $id=trim(fgets(STDIN));
+    $objEmpresa=new Empresa();
+    if(!$objEmpresa->buscar($id)){
+        do{
+            echo "no existe ninguna empresa con ese ID. \n";
+            echo "ingrese el ID de una empresa valido: \n";
+            $id=trim(fgets(STDIN));
+        }while(!$objEmpresa->buscar($id));
+    }
+    $viaje=new Viaje();
+    $viaje->cargar(null, $dest, $cantMax, [], $objResponsable, $costo, $objEmpresa);
+}
 
 function modificarViaje(){}
 

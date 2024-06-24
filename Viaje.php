@@ -26,11 +26,12 @@ class Viaje{
     }
 
 
-    public function cargar($cod, $dest, $maxPas, $pas, $costo, $objEmp){
+    public function cargar($cod, $dest, $maxPas, $colObjPasaj, $objResp, $costo, $objEmp){
         $this->setCodigo($cod);
         $this->setDestino($dest);
         $this->setCantMaxPasajeros($maxPas);
-        $this->setColObjPasajero($pas);
+        $this->setColObjPasajero($colObjPasaj);
+        $this->setObjResponsable($objResp);
         $this->setCosto($costo);
         $this->setObjEmpresa($objEmp);
     }
