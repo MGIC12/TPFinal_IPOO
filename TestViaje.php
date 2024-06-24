@@ -269,9 +269,9 @@ function modificarViaje(){
         $viaje->setDestino($dest);
         $viaje->setCantMaxPasajeros($cantmax);
         $viaje->setColObjPasajero([]);
-        $viaje->setObjResponsable($responsable);
+        $viaje->setObjResponsable($responsable->getNumEmpleado());
         $viaje->setCosto($costo);
-        $viaje->setObjEmpresa($empresa);
+        $viaje->setObjEmpresa($idEmp);
         return $viaje->modificar();
     }
 }

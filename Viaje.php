@@ -179,7 +179,13 @@ class Viaje{
     public function modificar(){
         $resp=false;
         $base=new BaseDatos();
-        $consulta="UPDATE viaje SET vdestino='".$this->getDestino()."',vcantmaxpasajeros='".$this->getCantMaxPasajeros()."', idempresa='".$this->getObjEmpresa()."', rnumeroempleado='".$this->getObjResponsable()."', vimporte='".$this->getCosto()."' WHERE idviaje=".$this->getCodigo();
+        $consulta="UPDATE viaje SET
+                    vdestino='".$this->getDestino()."',
+                    vcantmaxpasajeros='".$this->getCantMaxPasajeros()."',
+                    idempresa='".$this->getObjEmpresa()."',
+                    rnumeroempleado='".$this->getObjResponsable()."',
+                    vimporte='".$this->getCosto()."'
+                    WHERE idviaje='".$this->getCodigo()."'";
         if($base->iniciar()){
             if($base->ejecutar($consulta)){
                 $resp=true;
