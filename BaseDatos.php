@@ -63,6 +63,23 @@ class BaseDatos{
         return $resp;
     }
 
+    /**
+     * Posible solucion a "Expected type 'mysqli'. Found 'false'. en la funcion iniciar()"
+    
+    public function iniciar() {
+    $resp = false;
+    $conexion = mysqli_connect($this->HOSTNAME, $this->USUARIO, $this->CLAVE, $this->BASEDATOS);
+    if ($conexion) {
+        $this->CONEXION = $conexion;
+        unset($this->QUERY);
+        unset($this->ERROR);
+        $resp = true;
+    } else {
+        $this->ERROR = mysqli_connect_error();
+    }
+    return $resp;
+}
+     */
 
     /**
      * Ejecuta una consulta en la Base de Datos.
