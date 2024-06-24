@@ -93,6 +93,7 @@ class ResponsableV extends Persona{
         }else{
             $this->setMensaje($base->getError());
         }
+        return $arrayResponsable;
     }
 
 

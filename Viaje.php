@@ -151,6 +151,7 @@ class Viaje{
         }else{
             $this->setMensaje($base->getError());
         }
+        return $arrayViaje;
     }
 
 

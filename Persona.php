@@ -108,6 +108,7 @@ class Persona{
         }else{
             $this->setMensaje($base->getError());
         }
+        return $arrayPersona;
     }
 
 

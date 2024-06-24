@@ -96,6 +96,7 @@ class Empresa{
         }else{
             $this->setMensaje($base->getError());
         }
+        return $arrayEmpresa;
     }
 
 

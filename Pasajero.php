@@ -90,6 +90,7 @@ class Pasajero extends Persona{
         }else{
             $this->setMensaje($base->getError());
         }
+        return $arrayPasajero;
     }
 
 
