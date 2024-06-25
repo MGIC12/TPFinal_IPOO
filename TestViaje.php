@@ -106,7 +106,10 @@ function modificarEmpresa(){
     echo "Ingrese el Id de la empresa: \n";
     $id=trim(fgets(STDIN));
     if(!$empresa->buscar($id)){
-        echo "No se encontro ninguna empresa con el ID ingresado.\n";
+        do{
+            echo "No se encontro ninguna empresa con el ID ingresado.\n";
+            echo "Ingrese un ID valido: \n";
+        }while(!$empresa->buscar($id));
     }else{
         echo "La empresa es ".$empresa->getNombre()."\n";
         echo "Ingrese el nuevo nombre: \n";
@@ -192,7 +195,7 @@ function mostrarViajes(){
     $viaje=new Viaje();
     $viajes=$viaje->listar();
     foreach($viajes as $viaje){
-        echo "\n$viaje";
+        echo "\n$viaje\n";
     }
 }
 
@@ -227,9 +230,8 @@ function ingresarViaje(){
     $cantMax=trim(fgets(STDIN));
     echo "Ingrese el costo del viaje: \n";
     $costo=trim(fgets(STDIN));
-    $arrayPasajeros=[];
     $viaje=new Viaje();
-    $viaje->cargar(null, $dest, $cantMax, $arrayPasajeros, $objResponsable->getNumEmpleado(), $costo, $id);
+    $viaje->cargar(null, $dest, $cantMax, $objResponsable->getNumEmpleado(), $costo, $id);
     return $viaje->insertar();
 }
 
@@ -250,7 +252,7 @@ function modificarViaje(){
         if(!$responsable->buscar($numEmp)){
             do{
                 echo "No se encontro ningun responsable con ese numero de empleado: \n";
-                echo "Ingrese un numero de empleado valido: ";
+                echo "Ingrese un numero de empleado valido: \n";
                 $numEmp=trim(fgets(STDIN));
             }while(!$responsable->buscar($numEmp));
         }
