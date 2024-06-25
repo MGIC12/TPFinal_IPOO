@@ -26,11 +26,10 @@ class Viaje{
     }
 
 
-    public function cargar($cod, $dest, $maxPas, $colObjPasaj, $objResp, $costo, $objEmp){
+    public function cargar($cod, $dest, $maxPas, $objResp, $costo, $objEmp){
         $this->setCodigo($cod);
         $this->setDestino($dest);
         $this->setCantMaxPasajeros($maxPas);
-        $this->setColObjPasajero($colObjPasaj);
         $this->setObjResponsable($objResp);
         $this->setCosto($costo);
         $this->setObjEmpresa($objEmp);
@@ -143,7 +142,7 @@ class Viaje{
                     $importe=$row2['vimporte'];
 
                     $viaje=new Viaje();
-                    $viaje->cargar($idViaje, $destino, $cantMaxPas, $idEmpresa, $numEmp, $importe);
+                    $viaje->cargar($idViaje, $destino, $cantMaxPas, $numEmp, $importe, $idEmpresa);
                     array_push($arrayViaje,$viaje);
                 }
             }else{
@@ -229,10 +228,14 @@ class Viaje{
         "Codigo de viaje: ".$this->getCodigo()."\n".
         "Destino: ".$this->getDestino()."\n".
         "Cantidad maxima de Pasajeros: ".$this->getCantMaxPasajeros()."\n".
+        /*
         "Pasajeros: ".$this->retornarCadena($this->getColObjPasajero())."\n".
-        "Responsable: ".$this->getObjResponsable()."\n".
-        "Costo del viaje: ".$this->getCosto()."\n".
+        */
+        "Numero de empleado del Responsable: ".$this->getObjResponsable()."\n".
+        "Costo del viaje: ".$this->getCosto()."\n";
+        /*
         "Suma de costos abonados por pasajeros: ".$this->getSumaCostosAbonados();
+        */
     }
 
     

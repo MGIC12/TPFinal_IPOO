@@ -71,7 +71,7 @@ class Pasajero extends Persona{
         if($condicion!=""){
             $consulta=$consulta." WHERE ".$condicion;
         }
-        $consulta.=" ORDER BY papellido ";
+        $consulta.=" ORDER BY pdocumento ";
         if($base->iniciar()){
             if($base->ejecutar($consulta)){
                 $arrayPasajero= array();

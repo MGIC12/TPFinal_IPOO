@@ -84,7 +84,7 @@ class ResponsableV extends Persona{
                     $atributo2=$row2['atributo2'];
                     */
                     $responsable=new ResponsableV();
-                    $responsable->buscar($row2['rdocumento']);
+                    $responsable->buscar($row2['rnumeroempleado']);
                     array_push($arrayResponsable,$responsable);
                 }
             }else{
