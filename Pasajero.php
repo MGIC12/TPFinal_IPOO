@@ -42,6 +42,12 @@ class Pasajero extends Persona{
     }
 
 
+    /**
+     * Funcion para buscar un pasajero por DNI en la base de datos
+     * 
+     * @param string $dni El DNI del pasajero a buscar
+     * @return bool Devuelve true si se encontró al pasajero, false si no
+     */
     public function buscar($dni){
 		$base=new BaseDatos();
 		$consulta="SELECT * FROM pasajero WHERE pdocumento= '".$dni."'";
@@ -64,6 +70,12 @@ class Pasajero extends Persona{
 	}
 
 
+    /**
+     * Funcion para listar pasajeros en la base de datos
+     * 
+     * @param string $condicion La condición opcional para filtrar los pasajeros
+     * @return array|null Devuelve un array de objetos Pasajero o null si no hay pasajeros
+     */
     public function listar($condicion=""){
         $arrayPasajero=null;
         $base=new BaseDatos();
@@ -95,6 +107,11 @@ class Pasajero extends Persona{
 
 
 
+    /**
+     * Funcion para insertar un pasajero en la base de datos
+     * 
+     * @return bool Devuelve true si se insertó correctamente, false si no
+     */
     public function insertar(){
         $base=new BaseDatos();
         $resp=false;
@@ -117,6 +134,11 @@ class Pasajero extends Persona{
 
 
 
+    /**
+     * Funcion para modificar un pasajero en la base de datos
+     * 
+     * @return bool Devuelve true si se modificó correctamente, false si no
+     */
     public function modificar(){
         $resp=false;
         $base=new BaseDatos();
@@ -138,6 +160,11 @@ class Pasajero extends Persona{
 
 
 
+    /**
+     * Funcion para eliminar un pasajero de la base de datos
+     * 
+     * @return bool Devuelve true si se eliminó correctamente, false si no
+     */
     public function eliminar(){
         $base=new BaseDatos();
         $resp=false;

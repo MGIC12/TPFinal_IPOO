@@ -18,7 +18,7 @@ class Empresa{
         $this->setDireccion($direc);
     }
 
-    //metodos de acceso
+    //Métodos de acceso
 
     public function getIdEmpresa(){
         return $this->idEmpresa;
@@ -48,12 +48,21 @@ class Empresa{
     }
 
 
+    /**
+    * Busca una empresa en la base de datos por su ID.
+    *
+    * @param int $idEmpresa El ID de la empresa a buscar.
+    * @return bool Devuelve true si se encuentra la empresa, false en caso contrario.
+    */
     public function buscar($idEmpresa){
 		$base=new BaseDatos();
+        // Construir la consulta SQL para buscar la empresa por su ID
 		$consulta="SELECT * FROM empresa WHERE idempresa= '".$idEmpresa."'";
 		$resp= false;
+        // Ejecutar la consulta
 		if($base->iniciar()){
 			if($base->ejecutar($consulta)){
+                // Verificar si se encontro la empresa
 				if($row2=$base->registro()){					
 				    $this->setIdEmpresa($idEmpresa);
 					$this->setNombre($row2['enombre']);
@@ -70,6 +79,12 @@ class Empresa{
 	}
 
 
+    /**
+    * Lista todas las empresas en la base de datos, filtradas por una condición opcional.
+    *
+    * @param string $condicion La condición para filtrar las empresas (opcional).
+    * @return array|null Devuelve un array de objetos Empresa si se encuentran empresas, null en caso contrario.
+    */
     public function listar($condicion=""){
         $arrayEmpresa=null;
         $base=new BaseDatos();
@@ -100,7 +115,11 @@ class Empresa{
     }
 
 
-
+    /**
+    * Inserta una nueva empresa en la base de datos.
+    *
+    * @return bool Devuelve true si la inserción fue exitosa, false en caso contrario.
+    */
     public function insertar(){
         $base=new BaseDatos();
         $resp=false;
@@ -120,6 +139,11 @@ class Empresa{
 
 
 
+    /**
+    * Modifica una empresa existente en la base de datos.
+    *
+    * @return bool Devuelve true si la modificación fue exitosa, false en caso contrario.
+    */
     public function modificar(){
         $resp=false;
         $base=new BaseDatos();
@@ -138,6 +162,11 @@ class Empresa{
 
 
 
+    /**
+    * Elimina una empresa de la base de datos.
+    *
+    * @return bool Devuelve true si la eliminación fue exitosa, false en caso contrario.
+    */
     public function eliminar(){
         $base=new BaseDatos();
         $resp=false;

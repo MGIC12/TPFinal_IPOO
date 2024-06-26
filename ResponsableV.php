@@ -44,6 +44,12 @@ class ResponsableV extends Persona{
 
 
 
+    /**
+     * Función que busca un empleado en la base de datos por número de empleado.
+     * 
+     * @param int $numEmple Número de empleado a buscar.
+     * @return bool true si se encontró el empleado, false si no.
+     */
     public function buscar($numEmple){
 		$base=new BaseDatos();
 		$consulta="SELECT * FROM responsable WHERE rnumeroempleado= '".$numEmple."'";
@@ -66,6 +72,12 @@ class ResponsableV extends Persona{
 	}
 
 
+    /**
+     * Función que lista los responsables en la base de datos según una condición dada.
+     * 
+     * @param string $condicion Condición opcional para filtrar la lista de responsables.
+     * @return array|null Un array de objetos ResponsableV si se encontraron responsables, o null si no se encontró ninguno.
+     */
     public function listar($condicion=""){
         $arrayResponsable=null;
         $base=new BaseDatos();
@@ -98,6 +110,11 @@ class ResponsableV extends Persona{
 
 
 
+    /**
+     * Función que inserta un nuevo responsable en la base de datos.
+     * 
+     * @return bool true si la inserción fue exitosa, false si no.
+     */
     public function insertar(){
         $base=new BaseDatos();
         $resp=false;
@@ -120,6 +137,11 @@ class ResponsableV extends Persona{
 
 
 
+    /**
+     * Función que modifica el número de licencia de un responsable en la base de datos.
+     * 
+     * @return bool true si la modificación fue exitosa, false si no.
+     */
     public function modificar(){
         $resp=false;
         $base=new BaseDatos();
@@ -141,6 +163,11 @@ class ResponsableV extends Persona{
 
 
 
+    /**
+     * Función que elimina un responsable de la base de datos.
+     * 
+     * @return bool true si la eliminación fue exitosa, false si no.
+     */
     public function eliminar(){
         $base=new BaseDatos();
         $resp=false;

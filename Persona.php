@@ -82,6 +82,12 @@ class Persona{
 	}
 
 
+    /**
+    * Función que lista las personas según una condición opcional.
+    * 
+    * @param string $condicion Condición opcional para filtrar las personas.
+    * @return array|null Arreglo de objetos de la clase Persona que cumplen con la condición o null si hay un error.
+    */
     public function listar($condicion=""){
         $arrayPersona=null;
         $base=new BaseDatos();
@@ -113,6 +119,11 @@ class Persona{
 
 
     
+    /**
+    * Función que inserta una nueva persona en la base de datos.
+    * 
+    * @return bool Devuelve true si la inserción fue exitosa, false en caso contrario.
+    */
     public function insertar(){
         $base=new BaseDatos();
         $resp=false;
@@ -131,6 +142,11 @@ class Persona{
     }
 
 
+    /**
+    * Función que modifica los datos de una persona en la base de datos.
+    * 
+    * @return bool Devuelve true si la modificación fue exitosa, false en caso contrario.
+    */
     public function modificar(){
         $resp=false;
         $base=new BaseDatos();
@@ -148,6 +164,11 @@ class Persona{
     }
 
 
+    /**
+     * Función que elimina una persona de la base de datos.
+     * 
+     * @return bool Devuelve true si la eliminación fue exitosa, false en caso contrario.
+     */
     public function eliminar(){
         $base=new BaseDatos();
         $resp=false;

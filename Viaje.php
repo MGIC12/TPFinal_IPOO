@@ -35,7 +35,7 @@ class Viaje{
         $this->setObjEmpresa($objEmp);
     }
 
-    //metodos de acceso
+    //Métodos de acceso
 
     public function getCodigo(){
         return $this->codigo;
@@ -97,6 +97,12 @@ class Viaje{
 
 
 
+    /**
+     * Busca un viaje en la base de datos por su ID.
+     *
+     * @param int $idViaje El ID del viaje a buscar.
+     * @return bool Devuelve true si se encontró el viaje, false en caso contrario.
+     */
     public function buscar($idViaje){
 		$base=new BaseDatos();
 		$consulta="SELECT * FROM viaje WHERE idviaje= '".$idViaje."'";
@@ -122,6 +128,12 @@ class Viaje{
 	}
 
 
+    /**
+     * Lista los viajes que cumplen con una condición opcional.
+     *
+     * @param string $condicion La condición opcional para filtrar los viajes.
+     * @return array|null Un array de objetos Viaje que cumplen con la condición, o null si no se encontraron viajes.
+     */
     public function listar($condicion=""){
         $arrayViaje=null;
         $base=new BaseDatos();
@@ -156,6 +168,11 @@ class Viaje{
 
 
 
+    /**
+     * Inserta un nuevo viaje en la base de datos.
+     *
+     * @return bool Devuelve true si la inserción se realizó correctamente, false en caso contrario.
+     */
     public function insertar(){
         $base=new BaseDatos();
         $resp=false;
@@ -175,6 +192,11 @@ class Viaje{
 
 
 
+    /**
+     * Modifica un viaje existente en la base de datos.
+     *
+     * @return bool Devuelve true si la modificación se realizó correctamente, false en caso contrario.
+     */
     public function modificar(){
         $resp=false;
         $base=new BaseDatos();
@@ -199,6 +221,11 @@ class Viaje{
 
 
 
+    /**
+     * Elimina un viaje existente de la base de datos.
+     *
+     * @return bool Devuelve true si la eliminación se realizó correctamente, false en caso contrario.
+     */
     public function eliminar(){
         $base=new BaseDatos();
         $resp=false;
@@ -215,6 +242,7 @@ class Viaje{
         return $resp;
     }
 
+
     public function retornarCadena($cadena){
         $nuevaCadena="";
         foreach($cadena as $valor){
@@ -223,6 +251,7 @@ class Viaje{
         return $nuevaCadena;
     }
 
+    
     public function __toString(){
         return
         "Codigo de viaje: ".$this->getCodigo()."\n".
