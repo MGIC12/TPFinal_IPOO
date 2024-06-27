@@ -2,27 +2,27 @@
 
 
 class ResponsableV extends Persona{
-    private $numEmpleado;
+    private $idResponsable;
     private $numLicencia;
     private $mensajeOperacion;
 
 
     public function __construct(){
         parent::__construct();
-        $this->numEmpleado="";
+        $this->idResponsable="";
         $this->numLicencia="";
     }
 
-    public function cargar($doc, $nom, $apell, $numEmple=null, $numLic=null){
+    public function cargar($doc, $nom, $apell, $idResp=null, $numLic=null){
         parent::cargar($doc, $nom, $apell);
-        $this->setNumEmpleado($numEmple);
+        $this->setIdResponsable($idResp);
         $this->setNumLicencia($numLic);
     }
 
     //metodos de acceso
 
-    public function getNumEmpleado(){
-        return $this->numEmpleado;
+    public function getIdResponsable(){
+        return $this->idResponsable;
     }
     public function getNumLicencia(){
         return $this->numLicencia;
@@ -32,8 +32,8 @@ class ResponsableV extends Persona{
     }
 
 
-    public function setNumEmpleado($numEmple){
-        $this->numEmpleado=$numEmple;
+    public function setIdResponsable($idResp){
+        $this->idResponsable=$idResp;
     }
     public function setNumLicencia($numLic){
         $this->numLicencia=$numLic;
@@ -47,18 +47,18 @@ class ResponsableV extends Persona{
     /**
      * Función que busca un empleado en la base de datos por número de empleado.
      * 
-     * @param int $numEmple Número de empleado a buscar.
+     * @param int $idResp Id de responsable a buscar.
      * @return bool true si se encontró el empleado, false si no.
      */
-    public function buscar($numEmple){
+    public function buscar($idResp){
 		$base=new BaseDatos();
-		$consulta="SELECT * FROM responsable WHERE rnumeroempleado= '".$numEmple."'";
+		$consulta="SELECT * FROM responsable WHERE idResponsable= '".$idResp."'";
 		$resp= false;
 		if($base->iniciar()){
 			if($base->ejecutar($consulta)){
 				if($row2=$base->registro()){
                     parent::buscar($row2['rdocumento']);
-					$this->setNumEmpleado($row2['rnumeroempleado']);
+					$this->setIdResponsable($row2['idResponsable']);
 					$this->setNumLicencia($row2['rnumerolicencia']);
 					$resp= true;
 				}				
@@ -85,7 +85,7 @@ class ResponsableV extends Persona{
         if($condicion!=""){
             $consulta=$consulta." WHERE ".$condicion;
         }
-        $consulta.=" ORDER BY rnumeroempleado ";
+        $consulta.=" ORDER BY idResponsable ";
         if($base->iniciar()){
             if($base->ejecutar($consulta)){
                 $arrayResponsable= array();
@@ -96,7 +96,7 @@ class ResponsableV extends Persona{
                     $atributo2=$row2['atributo2'];
                     */
                     $responsable=new ResponsableV();
-                    $responsable->buscar($row2['rnumeroempleado']);
+                    $responsable->buscar($row2['idResponsable']);
                     array_push($arrayResponsable,$responsable);
                 }
             }else{
@@ -119,8 +119,8 @@ class ResponsableV extends Persona{
         $base=new BaseDatos();
         $resp=false;
         if(parent::insertar()){
-            $consulta="INSERT INTO responsable(rnumeroempleado, rnumerolicencia, rdocumento)
-                VALUES ('".$this->getNumEmpleado()."','".$this->getNumLicencia()."','".$this->getDocumento()."')";
+            $consulta="INSERT INTO responsable(rnumerolicencia, rdocumento)
+                VALUES ('".$this->getNumLicencia()."','".$this->getDocumento()."')";
                 /*numEmpleado(id) no deberia estar el en INSERT*/
             if($base->iniciar()){
                 if($base->ejecutar($consulta)){
@@ -146,7 +146,7 @@ class ResponsableV extends Persona{
         $resp=false;
         $base=new BaseDatos();
         if(parent::modificar()){
-            $consulta="UPDATE responsable SET rnumerolicencia='".$this->getNumLicencia()."' WHERE rnumeroempleado=".$this->getNumEmpleado();
+            $consulta="UPDATE responsable SET rnumerolicencia='".$this->getNumLicencia()."' WHERE idResponsable=".$this->getIdResponsable();
             if($base->iniciar()){
                 if($base->ejecutar($consulta)){
                     $resp=true;
@@ -173,7 +173,7 @@ class ResponsableV extends Persona{
         $resp=false;
         if(parent::eliminar()){
             if($base->iniciar()){
-                $consultaBorrar="DELETE FROM responsable WHERE rnumeroempleado=".$this->getNumEmpleado();
+                $consultaBorrar="DELETE FROM responsable WHERE idResponsable=".$this->getIdResponsable();
                 if($base->ejecutar($consultaBorrar)){
                     $resp=true;
                 }else{
@@ -190,7 +190,7 @@ class ResponsableV extends Persona{
     public function __toString(){
         $cadena=parent::__toString();
         $cadena.=
-        "Numero de empleado: ".$this->getNumEmpleado()."\n".
+        "Numero de empleado: ".$this->getIdResponsable()."\n".
         "Numero de licencia: ".$this->getNumLicencia()."\n";
         return $cadena;
     }

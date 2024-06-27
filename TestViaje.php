@@ -43,7 +43,7 @@ while(true){
         case 3:
             $modifEmp=modificarEmpresa();
             if($modifEmp){
-                echo "\nLa empresa ah sido modificada con exito. \n";
+                echo "\nLa empresa a sido modificada con exito. \n";
             }else{
                 echo "\nHubo un error al tratar de modificar la empresa. \n";
             }
@@ -51,7 +51,7 @@ while(true){
         case 4:
             $elimEmp=eliminarEmpresa();
             if($elimEmp){
-                echo "\nLa empresa ah sido eliminada con exito.\n";
+                echo "\nLa empresa a sido eliminada con exito.\n";
             }else{
                 echo "\nHubo un error al eliminar la empresa. \n";
             }
@@ -70,7 +70,7 @@ while(true){
         case 7:
             $modifResp=modificarResponsable();
             if($modifResp){
-                echo "\nEl responsable ah sido modificado con exito. \n";
+                echo "\nEl responsable a sido modificado con exito. \n";
             }else{
                 echo "\nHubo un error al tratar de modificar el responsable. \n";
             }
@@ -78,7 +78,7 @@ while(true){
         case 8:
             $elimResp=eliminarResponsable();
             if($elimResp){
-                echo "\nEl responsable ah sido eliminado con exito.\n";
+                echo "\nEl responsable a sido eliminado con exito.\n";
             }else{
                 echo "\nHubo un error al eliminar el responsable. \n";
             }
@@ -97,7 +97,7 @@ while(true){
         case 11:
             $modifViaje=modificarViaje();
             if($modifViaje){
-                echo "\nEl viaje ah sido modificada con exito. \n";
+                echo "\nEl viaje a sido modificada con exito. \n";
             }else{
                 echo "\nHubo un error al tratar de modificar el viaje. \n";
             }
@@ -105,7 +105,7 @@ while(true){
         case 12:
             $elimViaje=eliminarViaje();
             if($elimViaje){
-                echo "\nEl viaje ah sido eliminado con exito.\n";
+                echo "\nEl viaje a sido eliminado con exito.\n";
             }else{
                 echo "\nHubo un error al eliminar el viaje. \n";
             }
@@ -124,7 +124,7 @@ while(true){
         case 15:
             $modifPasaj=modificarPasajero();
             if($modifPasaj){
-                echo "\nEl pasajero ah sido modificado con exito. \n";
+                echo "\nEl pasajero a sido modificado con exito. \n";
             }else{
                 echo "\nHubo un error al tratar de modificar el pasajero. \n";
             }
@@ -132,7 +132,7 @@ while(true){
         case 16:
             $elimPasaj=eliminarPasajero();
             if($elimPasaj){
-                echo "\nEl pasajero ah sido eliminado con exito.\n";
+                echo "\nEl pasajero a sido eliminado con exito.\n";
             }else{
                 echo "\nHubo un error al eliminar el pasajero. \n";
             }
@@ -223,15 +223,15 @@ function ingresarResponsable(){
 }
 
 function modificarResponsable(){
-    echo "ingrese el numero de empleado del responsable que desea modificar: \n";
-    $numEmpl=trim(fgets(STDIN));
+    echo "ingrese el ID del responsable que desea modificar: \n";
+    $idResp=trim(fgets(STDIN));
     $responsable=new ResponsableV();
-    if(!$responsable->buscar($numEmpl)){
+    if(!$responsable->buscar($idResp)){
         do{
-            echo "no se encontro ningun responsable con dicho numero de empleado. \n";
-            echo "Ingrese un numero de empleado valido: \n";
-            $numEmpl=trim(fgets(STDIN));
-        }while(!$responsable->buscar($numEmpl));
+            echo "no se encontro ningun responsable con dicho ID. \n";
+            echo "Ingrese un ID valido: \n";
+            $idResp=trim(fgets(STDIN));
+        }while(!$responsable->buscar($idResp));
     }
     echo "\nEl responsable es ".$responsable->getNombre()." ".$responsable->getApellido()."\n";
     echo "Ingrese el nuevo numero de licencia: \n";
@@ -248,15 +248,15 @@ function modificarResponsable(){
 }
 
 function eliminarResponsable(){
-    echo "ingrese el numero de empleado que desea eliminar: \n";
-    $numEmpl=trim(fgets(STDIN));
+    echo "ingrese el ID del responsable que desea eliminar: \n";
+    $idResp=trim(fgets(STDIN));
     $responsable=new ResponsableV();
-    if(!$responsable->buscar($numEmpl)){
+    if(!$responsable->buscar($idResp)){
         do{
-            echo "no se encontro ningun responsable con dicho numero de empleado. \n";
-            echo "Ingrese un numero de empleado valido: \n";
-            $numEmpl=trim(fgets(STDIN));
-        }while(!$responsable->buscar($numEmpl));
+            echo "no se encontro ningun responsable con dicho ID. \n";
+            echo "Ingrese un ID valido: \n";
+            $idResp=trim(fgets(STDIN));
+        }while(!$responsable->buscar($idResp));
     }
     return $responsable->eliminar();
     
@@ -283,15 +283,15 @@ function ingresarViaje(){
     }
     echo "\nLa empresa es ".$empresa->getNombre()."\n";
     
-    echo "Ingrese el número de empleado del responsable: \n";
-    $numEmpl=trim(fgets(STDIN));
+    echo "Ingrese el ID del responsable: \n";
+    $idResp=trim(fgets(STDIN));
     $objResponsable=new ResponsableV();
-    if(!$objResponsable->buscar($numEmpl)){
+    if(!$objResponsable->buscar($idResp)){
         do{
-            echo "No existe ningún responsable con este número de empleado. \n";
-            echo "Ingrese un número de empleado válido: \n";
-            $numEmpl=trim(fgets(STDIN));
-        }while(!$objResponsable->buscar($numEmpl));
+            echo "No existe ningún responsable con este ID. \n";
+            echo "Ingrese un ID válido: \n";
+            $idResp=trim(fgets(STDIN));
+        }while(!$objResponsable->buscar($idResp));
     }
     echo "\nEl responsable es: ".$objResponsable->getNombre()." ".$objResponsable->getApellido()."\n";
     
@@ -302,7 +302,7 @@ function ingresarViaje(){
     echo "Ingrese el costo del viaje: \n";
     $costo=trim(fgets(STDIN));
     $viaje=new Viaje();
-    $viaje->cargar(null, $dest, $cantMax, $objResponsable->getNumEmpleado(), $costo, $id);
+    $viaje->cargar(null, $dest, $cantMax, $objResponsable->getIdResponsable(), $costo, $id);
     return $viaje->insertar();
 }
 
@@ -321,15 +321,15 @@ function modificarViaje(){
     $dest=trim(fgets(STDIN));
     echo "Ingrese la nueva cantidad máxima de pasajeros: \n";
     $cantmax=trim(fgets(STDIN));
-    echo "Ingrese el número del nuevo empleado: \n";
-    $numEmp=trim(fgets(STDIN));
+    echo "Ingrese el ID del nuevo responsable: \n";
+    $idResp=trim(fgets(STDIN));
     $responsable=new ResponsableV();
-    if(!$responsable->buscar($numEmp)){
+    if(!$responsable->buscar($idResp)){
         do{
-            echo "No se encontró ningun responsable con ese número de empleado: \n";
-            echo "Ingrese un número de empleado válido: \n";
-            $numEmp=trim(fgets(STDIN));
-        }while(!$responsable->buscar($numEmp));
+            echo "No se encontró ningun responsable con ese ID: \n";
+            echo "Ingrese un ID válido: \n";
+            $idResp=trim(fgets(STDIN));
+        }while(!$responsable->buscar($idResp));
     }
     echo "Ingrese el nuevo costo de viaje: \n";
     $costo=trim(fgets(STDIN));
@@ -346,7 +346,7 @@ function modificarViaje(){
     $viaje->setDestino($dest);
     $viaje->setCantMaxPasajeros($cantmax);
     $viaje->setColObjPasajero([]);
-    $viaje->setObjResponsable($responsable->getNumEmpleado());
+    $viaje->setObjResponsable($responsable->getIdResponsable());
     $viaje->setCosto($costo);
     $viaje->setObjEmpresa($idEmp);
     return $viaje->modificar();

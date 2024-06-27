@@ -242,30 +242,12 @@ class Viaje{
         return $resp;
     }
 
-
-    public function retornarCadena($cadena){
-        $nuevaCadena="";
-        foreach($cadena as $valor){
-            $nuevaCadena.=$valor."\n";
-        }
-        return $nuevaCadena;
-    }
-
-    
     public function __toString(){
         return
         "Codigo de viaje: ".$this->getCodigo()."\n".
         "Destino: ".$this->getDestino()."\n".
         "Cantidad maxima de Pasajeros: ".$this->getCantMaxPasajeros()."\n".
-        /*
-        "Pasajeros: ".$this->retornarCadena($this->getColObjPasajero())."\n".
-        */
         "Numero de empleado del Responsable: ".$this->getObjResponsable()."\n".
         "Costo del viaje: ".$this->getCosto()."\n";
-        /*
-        "Suma de costos abonados por pasajeros: ".$this->getSumaCostosAbonados();
-        */
     }
-
-    
 }

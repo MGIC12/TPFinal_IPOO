@@ -123,8 +123,8 @@ class Empresa{
     public function insertar(){
         $base=new BaseDatos();
         $resp=false;
-        $consulta="INSERT INTO empresa(idempresa, enombre, edireccion)
-                VALUES ('".$this->getIdEmpresa()."','".$this->getNombre()."','".$this->getDireccion()."')";
+        $consulta="INSERT INTO empresa(enombre, edireccion)
+                VALUES ('".$this->getNombre()."','".$this->getDireccion()."')";
                 /*no es necesario el id*/
         if($base->iniciar()){
             if($base->ejecutar($consulta)){
