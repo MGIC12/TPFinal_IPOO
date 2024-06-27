@@ -190,7 +190,7 @@ class ResponsableV extends Persona{
     public function __toString(){
         $cadena=parent::__toString();
         $cadena.=
-        "Numero de empleado: ".$this->getIdResponsable()."\n".
+        "ID de responsable: ".$this->getIdResponsable()."\n".
         "Numero de licencia: ".$this->getNumLicencia()."\n";
         return $cadena;
     }

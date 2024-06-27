@@ -2,24 +2,30 @@
 
 
 class Pasajero extends Persona{
+    private $idPasajero;
     private $telefono;
     private $idViaje;
     private $mensajeOperacion;
 
     public function __construct(){
         parent::__construct();
+        $this->idPasajero="";
         $this->telefono="";
         $this->idViaje="";
     }
 
-    public function cargar($doc, $nom, $apell, $tel=null, $idViaj=null){
+    public function cargar($doc, $nom, $apell, $idResp=null, $tel=null, $idViaj=null){
         parent::cargar($doc, $nom, $apell);
+        $this->setIdPasajero($idResp);
         $this->setTelefono($tel);
         $this->setIdViaje($idViaj);
     }
 
     //metodos de acceso
 
+    public function getIdPasajero(){
+        return $this->idPasajero;
+    }
     public function getTelefono(){
         return $this->telefono;
     }
@@ -31,6 +37,9 @@ class Pasajero extends Persona{
     }
 
 
+    public function setIdPasajero($id){
+        $this->idPasajero=$id;
+    }
     public function setTelefono($tel){
         $this->telefono=$tel;
     }
@@ -48,14 +57,15 @@ class Pasajero extends Persona{
      * @param string $dni El DNI del pasajero a buscar
      * @return bool Devuelve true si se encontró al pasajero, false si no
      */
-    public function buscar($dni){
+    public function buscar($id){
 		$base=new BaseDatos();
-		$consulta="SELECT * FROM pasajero WHERE pdocumento= '".$dni."'";
+		$consulta="SELECT * FROM pasajero WHERE idpasajero= '".$id."'";
 		$resp= false;
 		if($base->iniciar()){
 			if($base->ejecutar($consulta)){
 				if($row2=$base->registro()){
-                    parent::buscar($dni);
+                    parent::buscar($row2['pdocumento']);
+                    $this->setIdPasajero($row2['idpasajero']);
 					$this->setTelefono($row2['ptelefono']);
 					$this->setIdViaje($row2['idviaje']);
 					$resp= true;
@@ -83,7 +93,7 @@ class Pasajero extends Persona{
         if($condicion!=""){
             $consulta=$consulta." WHERE ".$condicion;
         }
-        $consulta.=" ORDER BY pdocumento ";
+        $consulta.=" ORDER BY idpasajero ";
         if($base->iniciar()){
             if($base->ejecutar($consulta)){
                 $arrayPasajero= array();
@@ -93,7 +103,7 @@ class Pasajero extends Persona{
                     $idViaje=$row2['idviaje'];
                     */
                     $pasajero=new Pasajero();
-                    $pasajero->buscar($row2['pdocumento']);
+                    $pasajero->buscar($row2['idpasajero']);
                     array_push($arrayPasajero,$pasajero);
                 }
             }else{
@@ -143,7 +153,7 @@ class Pasajero extends Persona{
         $resp=false;
         $base=new BaseDatos();
         if(parent::modificar()){
-            $consulta="UPDATE pasajero SET ptelefono='".$this->getTelefono()."',idviaje='".$this->getIdViaje()."' WHERE pdocumento=".$this->getDocumento();
+            $consulta="UPDATE pasajero SET ptelefono='".$this->getTelefono()."',idviaje='".$this->getIdViaje()."' WHERE idpasajero=".$this->getIdPasajero();
         
             if($base->iniciar()){
                 if($base->ejecutar($consulta)){
@@ -170,7 +180,7 @@ class Pasajero extends Persona{
         $resp=false;
         if(parent::eliminar()){
             if($base->iniciar()){
-                $consultaBorrar="DELETE FROM pasajero WHERE pdocumento=".$this->getDocumento();
+                $consultaBorrar="DELETE FROM pasajero WHERE idpasajero=".$this->getIdPasajero();
                 if($base->ejecutar($consultaBorrar)){
                     $resp=true;
                 }else{
@@ -188,6 +198,7 @@ class Pasajero extends Persona{
     public function __toString(){
         $cadena=parent::__toString();
         $cadena .=
+        "ID de pasajero: ".$this->getIdPasajero()."\n".
         "Telefono: ".$this->getTelefono()."\n".
         "Id del viaje: ".$this->getIdViaje()."\n";
         return $cadena;
