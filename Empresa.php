@@ -162,6 +162,33 @@ class Empresa{
         return $resp;
     }
 
+    /*
+    public function modificar(){
+    $resp = false;
+    $base = new BaseDatos();
+    
+    // Verificar si el id existe
+    $id = $this->getIdEmpresa();
+    $query = "SELECT COUNT(*) as count FROM empresa WHERE idempresa = $id";
+    if($base->iniciar() && $base->ejecutar($query)) {
+        $result = $base->getResult();
+        $count = $result[0]['count'];
+        if($count > 0) {
+            // El id existe, proceder con la actualización
+            $consulta = "UPDATE empresa SET enombre='".$this->getNombre()."',edireccion='".$this->getDireccion()."' WHERE idempresa=".$this->getIdEmpresa();
+            if($base->ejecutar($consulta)) {
+                $resp = true;
+            } else {
+                $this->setMensaje($base->getError());
+            }
+        } else {
+            $this->setMensaje("El id no existe");
+        }
+    } else {
+        $this->setMensaje($base->getError());
+    }
+    return $resp;
+}*/
 
 
     /**
