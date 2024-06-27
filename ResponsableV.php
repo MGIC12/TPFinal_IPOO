@@ -121,7 +121,7 @@ class ResponsableV extends Persona{
         if(parent::insertar()){
             $consulta="INSERT INTO responsable(rnumeroempleado, rnumerolicencia, rdocumento)
                 VALUES ('".$this->getNumEmpleado()."','".$this->getNumLicencia()."','".$this->getDocumento()."')";
-        
+                /*numEmpleado(id) no deberia estar el en INSERT*/
             if($base->iniciar()){
                 if($base->ejecutar($consulta)){
                     $resp=true;

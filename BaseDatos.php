@@ -78,7 +78,7 @@ class BaseDatos{
         $this->ERROR = mysqli_connect_error();
     }
     return $resp;
-}
+    }
      */
 
     /**

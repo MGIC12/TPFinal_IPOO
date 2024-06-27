@@ -118,7 +118,7 @@ class Pasajero extends Persona{
         if(parent::insertar()){
             $consulta="INSERT INTO pasajero(pdocumento, ptelefono, idviaje)
                     VALUES ('".$this->getDocumento()."','".$this->getTelefono()."','".$this->getIdViaje()."')";
-        
+                    /*agregar Id al pasajero*/
             if($base->iniciar()){
                 if($base->ejecutar($consulta)){
                     $resp=true;
@@ -184,7 +184,7 @@ class Pasajero extends Persona{
         return $resp;
     }
 
-
+    /*metodo tostring no deberia existir debido al metodo listar*/
     public function __toString(){
         $cadena=parent::__toString();
         $cadena .=

@@ -125,6 +125,7 @@ class Empresa{
         $resp=false;
         $consulta="INSERT INTO empresa(idempresa, enombre, edireccion)
                 VALUES ('".$this->getIdEmpresa()."','".$this->getNombre()."','".$this->getDireccion()."')";
+                /*no es necesario el id*/
         if($base->iniciar()){
             if($base->ejecutar($consulta)){
                 $resp=true;
@@ -149,6 +150,7 @@ class Empresa{
         $base=new BaseDatos();
         $consulta="UPDATE empresa SET enombre='".$this->getNombre()."',edireccion='".$this->getDireccion()."' WHERE idempresa=".$this->getIdEmpresa();
         if($base->iniciar()){
+            /*verificar si el id existe*/
             if($base->ejecutar($consulta)){
                 $resp=true;
             }else{
@@ -172,6 +174,7 @@ class Empresa{
         $resp=false;
         if($base->iniciar()){
             $consultaBorrar="DELETE FROM empresa WHERE idempresa=".$this->getIdEmpresa();
+            /*verificar si el ID existe*/
             if($base->ejecutar($consultaBorrar)){
                 $resp=true;
             }else{
