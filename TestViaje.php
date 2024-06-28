@@ -387,8 +387,16 @@ function ingresarPasajero(){
     $tel=trim(fgets(STDIN));
     echo "Ingrese el ID del viaje: \n";
     $id=trim(fgets(STDIN));
+    $viaje=new Viaje();
+    if(!$viaje->buscar($id)){
+        do{
+            echo "No se encontró ningun viaje con dicho ID. \n";
+            echo "Ingrese un ID válido: \n";
+            $id=trim(fgets(STDIN));
+        }while(!$viaje->buscar($id));
+    }
     $pasajero=new Pasajero();
-    $pasajero->cargar($doc, $nom, $apell, $tel, $id);
+    $pasajero->cargar($doc, $nom, $apell, null, $tel, $id);
     return $pasajero->insertar();
 }
 

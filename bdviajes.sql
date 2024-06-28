@@ -44,7 +44,7 @@ CREATE TABLE viaje (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT = 1;
 	
 CREATE TABLE pasajero (
-    idpasajero bigInt AUTO_INCREMENT,
+    idpasajero bigint AUTO_INCREMENT,
     pdocumento bigint,
     /*
     pnombre varchar(150), 
