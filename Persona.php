@@ -186,7 +186,7 @@ class Persona{
     }
 
 
-
+    //el __toString si es util ya que es llamado a la hora de imprimir los datos de las instancias de la clase en el testViaje
     public function __toString(){
         return
         "Documento: ".$this->getDocumento()."\n".

@@ -204,7 +204,7 @@ class Pasajero extends Persona{
         return $resp;
     }
 
-    /*metodo tostring no deberia existir debido al metodo listar*/
+    //el __toString si es util ya que es llamado a la hora de imprimir los datos de las instancias de la clase en el testViaje
     public function __toString(){
         $cadena=parent::__toString();
         $cadena .=

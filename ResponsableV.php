@@ -197,6 +197,9 @@ class ResponsableV extends Persona{
         return $resp;
     }
 
+
+
+    //el __toString si es util ya que es llamado a la hora de imprimir los datos de las instancias de la clase en el testViaje
     public function __toString(){
         $cadena=parent::__toString();
         $cadena.=
