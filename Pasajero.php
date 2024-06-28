@@ -152,19 +152,22 @@ class Pasajero extends Persona{
     public function modificar(){
         $resp=false;
         $base=new BaseDatos();
-        if(parent::modificar()){
-            $consulta="UPDATE pasajero SET ptelefono='".$this->getTelefono()."',idviaje='".$this->getIdViaje()."' WHERE idpasajero=".$this->getIdPasajero();
-        
-            if($base->iniciar()){
-                if($base->ejecutar($consulta)){
-                    $resp=true;
+            if(parent::modificar()){
+                $consulta="UPDATE pasajero SET ptelefono='".$this->getTelefono()."',idviaje='".$this->getIdViaje()."' WHERE idpasajero=".$this->getIdPasajero();
+            
+                if($base->iniciar()){
+                    if($base->ejecutar($consulta)){
+                        $resp=true;
+                    }else{
+                        $this->setMensaje($base->getError());
+                    }
                 }else{
                     $this->setMensaje($base->getError());
                 }
             }else{
                 $this->setMensaje($base->getError());
             }
-        }
+        
         return $resp;
     }
 
@@ -178,18 +181,25 @@ class Pasajero extends Persona{
     public function eliminar(){
         $base=new BaseDatos();
         $resp=false;
-        if(parent::eliminar()){
-            if($base->iniciar()){
-                $consultaBorrar="DELETE FROM pasajero WHERE idpasajero=".$this->getIdPasajero();
-                if($base->ejecutar($consultaBorrar)){
-                    $resp=true;
+        if($this->buscar($this->getIdPasajero())){
+            if(parent::eliminar()){
+                if($base->iniciar()){
+                    $consultaBorrar="DELETE FROM pasajero WHERE idpasajero=".$this->getIdPasajero();
+                    if($base->ejecutar($consultaBorrar)){
+                        $resp=true;
+                    }else{
+                        $this->setMensaje($base->getError());
+                    }
                 }else{
                     $this->setMensaje($base->getError());
                 }
             }else{
                 $this->setMensaje($base->getError());
             }
+        }else{
+            $this->setMensaje($base->getError());
         }
+        
         
         return $resp;
     }

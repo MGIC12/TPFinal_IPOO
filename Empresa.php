@@ -151,11 +151,16 @@ class Empresa{
         $consulta="UPDATE empresa SET enombre='".$this->getNombre()."',edireccion='".$this->getDireccion()."' WHERE idempresa=".$this->getIdEmpresa();
         if($base->iniciar()){
             /*verificar si el id existe*/
-            if($base->ejecutar($consulta)){
-                $resp=true;
+            if($this->buscar($this->getIdEmpresa())){
+                if($base->ejecutar($consulta)){
+                    $resp=true;
+                }else{
+                    $this->setMensaje($base->getError());
+                }
             }else{
                 $this->setMensaje($base->getError());
             }
+            
         }else{
             $this->setMensaje($base->getError());
         }
@@ -202,11 +207,16 @@ class Empresa{
         if($base->iniciar()){
             $consultaBorrar="DELETE FROM empresa WHERE idempresa=".$this->getIdEmpresa();
             /*verificar si el ID existe*/
-            if($base->ejecutar($consultaBorrar)){
-                $resp=true;
+            if($this->buscar($this->getIdEmpresa())){
+                if($base->ejecutar($consultaBorrar)){
+                    $resp=true;
+                }else{
+                    $this->setMensaje($base->getError());
+                }
             }else{
                 $this->setMensaje($base->getError());
             }
+            
         }else{
             $this->setMensaje($base->getError());
         }

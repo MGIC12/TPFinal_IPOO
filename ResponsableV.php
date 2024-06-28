@@ -145,18 +145,21 @@ class ResponsableV extends Persona{
     public function modificar(){
         $resp=false;
         $base=new BaseDatos();
-        if(parent::modificar()){
-            $consulta="UPDATE responsable SET rnumerolicencia='".$this->getNumLicencia()."' WHERE idResponsable=".$this->getIdResponsable();
-            if($base->iniciar()){
-                if($base->ejecutar($consulta)){
-                    $resp=true;
+            if(parent::modificar()){
+                $consulta="UPDATE responsable SET rnumerolicencia='".$this->getNumLicencia()."' WHERE idResponsable=".$this->getIdResponsable();
+                if($base->iniciar()){
+                    if($base->ejecutar($consulta)){
+                        $resp=true;
+                    }else{
+                        $this->setMensaje($base->getError());
+                    }
                 }else{
                     $this->setMensaje($base->getError());
                 }
             }else{
                 $this->setMensaje($base->getError());
             }
-        }
+        
         
         return $resp;
     }
@@ -171,18 +174,25 @@ class ResponsableV extends Persona{
     public function eliminar(){
         $base=new BaseDatos();
         $resp=false;
-        if(parent::eliminar()){
-            if($base->iniciar()){
-                $consultaBorrar="DELETE FROM responsable WHERE idResponsable=".$this->getIdResponsable();
-                if($base->ejecutar($consultaBorrar)){
-                    $resp=true;
+        if($this->buscar($this->getIdResponsable())){
+            if(parent::eliminar()){
+                if($base->iniciar()){
+                    $consultaBorrar="DELETE FROM responsable WHERE idResponsable=".$this->getIdResponsable();
+                    if($base->ejecutar($consultaBorrar)){
+                        $resp=true;
+                    }else{
+                        $this->setMensaje($base->getError());
+                    }
                 }else{
                     $this->setMensaje($base->getError());
                 }
             }else{
                 $this->setMensaje($base->getError());
             }
+        }else{
+            $this->setMensaje($base->getError());
         }
+        
         
         return $resp;
     }

@@ -114,7 +114,7 @@ class Viaje{
 					$this->setDestino($row2['vdestino']);
 					$this->setCantMaxPasajeros($row2['vcantmaxpasajeros']);
 					$this->setObjEmpresa($row2['idempresa']);
-					$this->setObjResponsable($row2['rnumeroempleado']);
+					$this->setObjResponsable($row2['idResponsable']);
 					$this->setCosto($row2['vimporte']);
 					$resp= true;
 				}				
@@ -204,15 +204,20 @@ class Viaje{
                     vdestino='".$this->getDestino()."',
                     vcantmaxpasajeros='".$this->getCantMaxPasajeros()."',
                     idempresa='".$this->getObjEmpresa()."',
-                    rnumeroempleado='".$this->getObjResponsable()."',
+                    idResponsable='".$this->getObjResponsable()."',
                     vimporte='".$this->getCosto()."'
                     WHERE idviaje='".$this->getCodigo()."'";
         if($base->iniciar()){
-            if($base->ejecutar($consulta)){
-                $resp=true;
+            if($this->buscar($this->getCodigo())){
+                if($base->ejecutar($consulta)){
+                    $resp=true;
+                }else{
+                    $this->setMensaje($base->getError());
+                }
             }else{
                 $this->setMensaje($base->getError());
             }
+            
         }else{
             $this->setMensaje($base->getError());
         }
@@ -231,11 +236,16 @@ class Viaje{
         $resp=false;
         if($base->iniciar()){
             $consultaBorrar="DELETE FROM viaje WHERE idviaje=".$this->getCodigo();
-            if($base->ejecutar($consultaBorrar)){
-                $resp=true;
+            if($this->buscar($this->getCodigo())){
+                if($base->ejecutar($consultaBorrar)){
+                    $resp=true;
+                }else{
+                    $this->setMensaje($base->getError());
+                }
             }else{
                 $this->setMensaje($base->getError());
             }
+            
         }else{
             $this->setMensaje($base->getError());
         }

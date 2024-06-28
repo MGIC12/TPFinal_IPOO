@@ -401,15 +401,15 @@ function ingresarPasajero(){
 }
 
 function modificarPasajero(){
-    echo "Ingrese el número de documento del pasajero que desea modificar: \n";
-    $doc=trim(fgets(STDIN));
+    echo "Ingrese el ID del pasajero que desea modificar: \n";
+    $id=trim(fgets(STDIN));
     $pasajero=new Pasajero();
-    if(!$pasajero->buscar($doc)){
+    if(!$pasajero->buscar($id)){
         do{
-            echo "No se encontró ningún pasajero con ese documento. \n";
-            echo "Ingrese un número de documento válido: \n";
-            $doc=trim(fgets(STDIN));
-        }while(!$pasajero->buscar($doc));
+            echo "No se encontró ningún pasajero con ese ID. \n";
+            echo "Ingrese un ID válido: \n";
+            $id=trim(fgets(STDIN));
+        }while(!$pasajero->buscar($id));
     }
     echo "\nEl pasajero es ".$pasajero->getNombre()." ".$pasajero->getApellido()."\n";
     echo "Ingrese el nuevo nombre: \n";
@@ -429,14 +429,14 @@ function modificarPasajero(){
 }
 
 function eliminarPasajero(){
-    echo "Ingrese el número de documento del pasajero que desea eliminar: \n";
-    $doc=trim(fgets(STDIN));
+    echo "Ingrese el ID del pasajero que desea eliminar: \n";
+    $id=trim(fgets(STDIN));
     $pasajero=new Pasajero();
-    if(!$pasajero->buscar($doc)){
+    if(!$pasajero->buscar($id)){
         do{
-            echo "No se encontró ningún pasajero con ese documento. \n";
-            echo "Ingrese un número de documento válido: \n";
-        }while(!$pasajero->buscar($doc));
+            echo "No se encontró ningún pasajero con ese ID. \n";
+            echo "Ingrese un ID válido: \n";
+        }while(!$pasajero->buscar($id));
     }
     return $pasajero->eliminar();
     
