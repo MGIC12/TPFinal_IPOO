@@ -436,6 +436,7 @@ function eliminarPasajero(){
         do{
             echo "No se encontró ningún pasajero con ese ID. \n";
             echo "Ingrese un ID válido: \n";
+            $id=trim(fgets(STDIN));
         }while(!$pasajero->buscar($id));
     }
     return $pasajero->eliminar();

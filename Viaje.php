@@ -150,7 +150,7 @@ class Viaje{
                     $destino=$row2['vdestino'];
                     $cantMaxPas=$row2['vcantmaxpasajeros'];
                     $idEmpresa=$row2['idempresa'];
-                    $numEmp=$row2['rnumeroempleado'];
+                    $numEmp=$row2['idResponsable'];
                     $importe=$row2['vimporte'];
 
                     $viaje=new Viaje();
@@ -257,10 +257,10 @@ class Viaje{
     //el __toString si es util ya que es llamado a la hora de imprimir los datos de las instancias de la clase en el testViaje
     public function __toString(){
         return
-        "Codigo de viaje: ".$this->getCodigo()."\n".
+        "ID de viaje: ".$this->getCodigo()."\n".
         "Destino: ".$this->getDestino()."\n".
         "Cantidad maxima de Pasajeros: ".$this->getCantMaxPasajeros()."\n".
-        "Numero de empleado del Responsable: ".$this->getObjResponsable()."\n".
+        "ID del Responsable: ".$this->getObjResponsable()."\n".
         "Costo del viaje: ".$this->getCosto()."\n";
     }
 }
